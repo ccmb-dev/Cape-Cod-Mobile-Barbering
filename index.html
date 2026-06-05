@@ -40,37 +40,48 @@
     header {
       background: var(--navy);
       color: var(--white);
-      padding: 2.5rem 1.5rem 2.2rem;
-      text-align: center;
+      padding: 1.75rem 2rem;
     }
-
-
 
     .header-inner {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      gap: .75rem;
+      justify-content: center;
+      gap: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto;
     }
 
     .logo-wrap img {
-      height: 140px;
+      height: 110px;
       width: auto;
       display: block;
       filter: drop-shadow(0 4px 16px rgba(0,0,0,.35));
       transition: transform .3s ease;
+      flex-shrink: 0;
     }
     .logo-wrap img:hover { transform: scale(1.04); }
 
-
+    .header-text {
+      text-align: left;
+    }
 
     h1 {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 900;
-      font-size: clamp(2rem, 7vw, 3.6rem);
+      font-size: clamp(1.8rem, 6vw, 3rem);
       line-height: 1.1;
       color: var(--white);
       letter-spacing: -.01em;
+    }
+
+    @media (max-width: 480px) {
+      .header-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .header-text { text-align: center; }
     }
 
 
@@ -288,7 +299,9 @@
     <div class="logo-wrap">
       <img src="gnome-01.png" alt="Cape Cod Mobile Barbers logo" />
     </div>
-    <h1>Cape Cod<br>Mobile Barbering</h1>
+    <div class="header-text">
+      <h1>Cape Cod<br>Mobile Barbering</h1>
+    </div>
   </div>
 </header>
 
@@ -338,34 +351,19 @@
   // Verify MA license at https://checkalicense.mass.gov/ before adding.
 
   const BARBERS = [
-    {
-      name:   "Jane Smith",
-      shop:   "Smith Mobile Cuts",
-      phone:  "(508) 555-0101",
-      email:  "jane@example.com",
-      web:    "janesmobilecuts.com",
-      areas:  "Hyannis, Barnstable, Yarmouth",
-      photo:  ""   // e.g. "jane-smith.jpg" — leave "" if no photo
-    },
-    {
-      name:   "Carlos Rivera",
-      shop:   "",
-      phone:  "(508) 555-0182",
-      email:  "carlos@example.com",
-      web:    "",
-      areas:  "Falmouth, Mashpee, Sandwich",
-      photo:  ""
-    },
-    {
-      name:   "Derek T. Washington",
-      shop:   "The Rolling Barber",
-      phone:  "(508) 555-0247",
-      email:  "derek@example.com",
-      web:    "therollingbarber.com",
-      areas:  "Orleans, Chatham, Brewster, Harwich",
-      photo:  ""
-    }
-    // ← Add more barbers here
+    // TO ADD A BARBER: paste the block below, fill in the details, and save.
+    // Every field except name is optional — just leave it as "".
+    // Verify MA license before adding: https://elicensing21.mass.gov/CitizenAccess/GeneralProperty/PropertyLookUp.aspx?isLicensee=Y
+    //
+    // {
+    //   name:   "First Last",
+    //   shop:   "Shop Name",
+    //   phone:  "(508) 555-0000",
+    //   email:  "email@example.com",
+    //   web:    "theirwebsite.com",
+    //   areas:  "Town, Town, Town",
+    //   photo:  "filename.jpg"
+    // },
   ];
 
   // ── Render ───────────────────────────────────────────────────────────────
