@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cape Cod Mobile Barbering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <meta name="color-scheme" content="light only" />
+  <style>
+    html { color-scheme: light only; background: #f9f8f7; }
+    /* ── Variables ─────────────────────────────── */
+    :root {
+      --navy:    #383E4E;   /* primary dark */
+      --crimson: #82323E;   /* accent / barber red */
+      --white:   #FFFFFF;
+      --black:   #000000;
+      --paper:   #f9f8f7;   /* near-white background */
+      --cream:   #f2efeb;
+      --rule:    #dcd8d2;
+      --muted:   #7a7470;
+      --card-bg: #ffffff;
+    }
+
+    /* ── Reset ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--navy);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* ── Masthead ───────────────────────────────── */
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 2.5rem 1.5rem 2.2rem;
+      text-align: center;
+    }
+
+
+
+    .header-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .logo-wrap img {
+      height: 140px;
+      width: auto;
+      display: block;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,.35));
+      transition: transform .3s ease;
+    }
+    .logo-wrap img:hover { transform: scale(1.04); }
+
+
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 7vw, 3.6rem);
+      line-height: 1.1;
+      color: var(--white);
+      letter-spacing: -.01em;
+    }
+
+
+
+
+
+    /* ── Disclaimer banner ──────────────────────── */
+    .disclaimer {
+      background: var(--crimson);
+      color: rgba(255,255,255,.9);
+      font-size: .82rem;
+      line-height: 1.6;
+      padding: .8rem 1.5rem;
+      text-align: center;
+    }
+    .disclaimer strong { color: var(--white); }
+    .disclaimer a { color: var(--white); text-decoration: underline; opacity: .85; }
+    .disclaimer a:hover { opacity: 1; }
+
+    /* ── Search bar ─────────────────────────────── */
+    .search-wrap {
+      max-width: 680px;
+      margin: 2rem auto 0;
+      padding: 0 1.25rem;
+    }
+    .search-wrap label {
+      display: block;
+      font-size: .78rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .4rem;
+    }
+    #search {
+      width: 100%;
+      padding: .7rem 1rem;
+      border: 2px solid var(--rule);
+      background: var(--white);
+      font-family: inherit;
+      font-size: .95rem;
+      color: var(--navy);
+      border-radius: 2px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    #search:focus { border-color: var(--navy); }
+
+    /* ── Directory ──────────────────────────────── */
+    main {
+      max-width: 900px;
+      margin: 2rem auto 4rem;
+      padding: 0 1.25rem;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: .75rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-head h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      color: var(--muted);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .section-head .hr { flex: 1; height: 1px; background: var(--rule); }
+    #count {
+      font-size: .8rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* ── Card grid ──────────────────────────────── */
+    #directory {
+      display: grid;
+      gap: 1px;
+      background: var(--rule);
+      border: 1px solid var(--rule);
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 1.35rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .2rem .75rem;
+      border-left: 4px solid transparent;
+      transition: background .15s, border-color .15s;
+    }
+    .card:hover {
+      background: #fdfbf8;
+      border-left-color: var(--crimson);
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+      grid-column: 1;
+    }
+    .card-shop {
+      font-size: .85rem;
+      color: var(--muted);
+      font-style: italic;
+      grid-column: 1;
+    }
+    .card-areas {
+      grid-column: 1 / -1;
+      font-size: .82rem;
+      color: var(--crimson);
+      letter-spacing: .04em;
+      margin-top: .25rem;
+      font-weight: 400;
+    }
+    .card-areas::before { content: '📍 '; }
+
+    .card-contact {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: center;
+      text-align: right;
+      font-size: .83rem;
+      line-height: 2;
+      color: var(--muted);
+    }
+    .card-contact a {
+      color: var(--navy);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--rule);
+      transition: color .15s, border-color .15s;
+    }
+    .card-contact a:hover { color: var(--crimson); border-color: var(--crimson); }
+    .card-contact .phone,
+    .card-contact .email,
+    .card-contact .web { display: block; }
+
+    /* ── Barber photo ────────────────────────────── */
+    .card-photo {
+      grid-column: 1 / -1;
+      margin-bottom: .5rem;
+    }
+    .card-photo img {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--rule);
+      display: block;
+    }
+
+
+    #no-results {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ── Footer ─────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.55);
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: .78rem;
+      line-height: 1.9;
+      position: relative;
+    }
+    footer::before {
+      content: '';
+      display: block;
+      height: 5px;
+      background: var(--crimson);
+      position: absolute;
+      top: 0; left: 0; right: 0;
+    }
+    footer a {
+      color: rgba(255,255,255,.8);
+      text-decoration: underline;
+    }
+    footer a:hover { color: var(--white); }
+    footer .footer-gnome {
+      height: 56px;
+      width: auto;
+      opacity: .25;
+      margin-bottom: .75rem;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── Responsive ─────────────────────────────── */
+    @media (max-width: 560px) {
+      .card { grid-template-columns: 1fr; }
+      .card-contact {
+        grid-column: 1;
+        grid-row: auto;
+        text-align: left;
+        margin-top: .5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ MASTHEAD ══════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <img src="gnome-01.png" alt="Cape Cod Mobile Barbers logo" />
+    </div>
+    <h1>Cape Cod<br>Mobile Barbering</h1>
+  </div>
+</header>
+
+<!-- ══ DISCLAIMER ════════════════════════════════════ -->
+<div class="disclaimer">
+  <strong>Notice:</strong> This is an independent informational directory only &mdash; not a referral service and not an endorsement of any individual listed.
+  All barbers listed hold an active Massachusetts barbering license in good standing at time of listing.
+  Verify credentials at <a href="https://checkalicense.mass.gov/" target="_blank" rel="noopener">CheckALicense.mass.gov</a>.
+  Contact barbers directly for availability, pricing, and service areas.
+</div>
+
+<!-- ══ SEARCH ════════════════════════════════════════ -->
+<div class="search-wrap">
+  <label for="search">Search by name, town, or area</label>
+  <input type="search" id="search" placeholder="e.g. Hyannis, Falmouth, shop name…" autocomplete="off" />
+</div>
+
+<!-- ══ DIRECTORY ═════════════════════════════════════ -->
+<main>
+  <div class="section-head">
+    <h2>Directory</h2>
+    <div class="hr"></div>
+    <span id="count"></span>
+  </div>
+
+  <div id="directory"></div>
+  <p id="no-results">No barbers found matching your search.</p>
+</main>
+
+<!-- ══ FOOTER ════════════════════════════════════════ -->
+<footer>
+  <img src="gnome-01.png" alt="" class="footer-gnome" aria-hidden="true" />
+  <p>To add or update a listing, email <a href="mailto:noah@capecodbarber.com">noah@capecodbarber.com</a></p>
+  <p style="margin-top:.4rem;">
+    This directory is a free public resource. Listings are not endorsements.
+    Licenses verified through the <a href="https://checkalicense.mass.gov/" target="_blank" rel="noopener">Massachusetts Division of Professional Licensure</a>.
+  </p>
+  <p style="margin-top:.6rem; opacity:.4;">
+    &copy; <span id="yr"></span> Cape Cod Mobile Barbering &bull; Cape Cod, MA
+  </p>
+</footer>
+
+<script>
+  // ── Barber data ──────────────────────────────────────────────────────────
+  // TO ADD A BARBER: copy one object, fill in the fields, save the file.
+  // Leave unknown fields as empty string "".
+  // Verify MA license at https://checkalicense.mass.gov/ before adding.
+
+  const BARBERS = [
+    {
+      name:   "Jane Smith",
+      shop:   "Smith Mobile Cuts",
+      phone:  "(508) 555-0101",
+      email:  "jane@example.com",
+      web:    "janesmobilecuts.com",
+      areas:  "Hyannis, Barnstable, Yarmouth",
+      photo:  ""   // e.g. "jane-smith.jpg" — leave "" if no photo
+    },
+    {
+      name:   "Carlos Rivera",
+      shop:   "",
+      phone:  "(508) 555-0182",
+      email:  "carlos@example.com",
+      web:    "",
+      areas:  "Falmouth, Mashpee, Sandwich",
+      photo:  ""
+    },
+    {
+      name:   "Derek T. Washington",
+      shop:   "The Rolling Barber",
+      phone:  "(508) 555-0247",
+      email:  "derek@example.com",
+      web:    "therollingbarber.com",
+      areas:  "Orleans, Chatham, Brewster, Harwich",
+      photo:  ""
+    }
+    // ← Add more barbers here
+  ];
+
+  // ── Render ───────────────────────────────────────────────────────────────
+  const dir       = document.getElementById('directory');
+  const noResults = document.getElementById('no-results');
+  const countEl   = document.getElementById('count');
+  const searchEl  = document.getElementById('search');
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  function makeCard(b) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.search = [b.name, b.shop, b.areas, b.phone, b.email].join(' ').toLowerCase();
+
+    const webLink   = b.web   ? `<a class="web"   href="https://${b.web.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">${b.web}</a>` : '';
+    const emailLink = b.email ? `<a class="email" href="mailto:${b.email}">${b.email}</a>` : '';
+    const phoneLink = b.phone ? `<a class="phone" href="tel:${b.phone.replace(/\D/g,'')}">${b.phone}</a>` : '';
+    const photoHTML = b.photo ? `<div class="card-photo"><img src="${b.photo}" alt="Photo of ${b.name}" /></div>` : '';
+
+    card.innerHTML = `
+      ${photoHTML}
+      <div class="card-name">${b.name}</div>
+      ${b.shop  ? `<div class="card-shop">${b.shop}</div>`   : ''}
+      ${b.areas ? `<div class="card-areas">${b.areas}</div>` : ''}
+      <div class="card-contact">${phoneLink}${emailLink}${webLink}</div>
+    `;
+    return card;
+  }
+
+  function render(filter = '') {
+    dir.innerHTML = '';
+    const q = filter.trim().toLowerCase();
+    let shown = 0;
+
+    BARBERS.forEach(b => {
+      const card = makeCard(b);
+      if (!q || card.dataset.search.includes(q)) {
+        dir.appendChild(card);
+        shown++;
+      }
+    });
+
+    noResults.style.display = shown === 0 ? 'block' : 'none';
+    countEl.textContent = shown === BARBERS.length
+      ? `${BARBERS.length} listed`
+      : `${shown} of ${BARBERS.length}`;
+  }
+
+  // Shuffle barbers randomly on each page load — keeps ordering fair
+  BARBERS.sort(() => Math.random() - 0.5);
+
+  render();
+  searchEl.addEventListener('input', e => render(e.target.value));
+</script>
+</body>
+</html>
