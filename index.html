@@ -12,11 +12,11 @@
     html { color-scheme: light only; background: #f9f8f7; }
     /* ── Variables ─────────────────────────────── */
     :root {
-      --navy:    #383E4E;   /* primary dark */
-      --crimson: #82323E;   /* accent / barber red */
+      --navy:    #383E4E;
+      --crimson: #82323E;
       --white:   #FFFFFF;
       --black:   #000000;
-      --paper:   #f9f8f7;   /* near-white background */
+      --paper:   #f9f8f7;
       --cream:   #f2efeb;
       --rule:    #dcd8d2;
       --muted:   #7a7470;
@@ -83,10 +83,6 @@
       }
       .header-text { text-align: center; }
     }
-
-
-
-
 
     /* ── Disclaimer banner ──────────────────────── */
     .disclaimer {
@@ -237,7 +233,6 @@
       display: block;
     }
 
-
     #no-results {
       display: none;
       text-align: center;
@@ -345,15 +340,12 @@
 
 <script>
   // ── Barber data ──────────────────────────────────────────────────────────
-  // TO ADD A BARBER: copy one object, fill in the fields, save the file.
-  // Leave unknown fields as empty string "".
-  // Verify MA license at https://checkalicense.mass.gov/ before adding.
+  // TO ADD A BARBER: copy the template block, fill in the details, and save.
+  // Every field except name is optional — just leave it as "".
+  // Verify MA license before adding: https://elicensing21.mass.gov/CitizenAccess/GeneralProperty/PropertyLookUp.aspx?isLicensee=Y
 
   const BARBERS = [
-    // TO ADD A BARBER: paste the block below, fill in the details, and save.
-    // Every field except name is optional — just leave it as "".
-    // Verify MA license before adding: https://elicensing21.mass.gov/CitizenAccess/GeneralProperty/PropertyLookUp.aspx?isLicensee=Y
-    //
+    // TEMPLATE — copy from here:
     // {
     //   name:   "First Last",
     //   shop:   "Shop Name",
@@ -363,15 +355,15 @@
     //   areas:  "Town, Town, Town",
     //   photo:  "filename.jpg"
     // },
-    // {
-       name:   "Noah Bromberg",
-       shop:   "Cape Cod Mobile Barbering",
-       phone:  "",
-       email:  "noah@capecodbarber.com",
-       web:    "capecodbarber.com",
-       areas:  "",
-       photo:  "gnome-01.png"
-    // },
+    {
+      name:   "Noah Bromberg",
+      shop:   "Cape Cod Mobile Barbering",
+      phone:  "",
+      email:  "noah@capecodbarber.com",
+      web:    "capecodbarber.com",
+      areas:  "",
+      photo:  "gnome-01.png"
+    },
   ];
 
   // ── Render ───────────────────────────────────────────────────────────────
