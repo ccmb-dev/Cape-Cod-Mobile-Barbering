@@ -164,10 +164,10 @@
 
     .card {
       background: var(--card-bg);
-      padding: 1.35rem 1.5rem;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: .2rem .75rem;
+      padding: .9rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
       border-left: 4px solid transparent;
       transition: background .15s, border-color .15s;
     }
@@ -176,37 +176,50 @@
       border-left-color: var(--crimson);
     }
 
+    /* ── Barber photo ────────────────────────────── */
+    .card-photo {
+      flex-shrink: 0;
+    }
+    .card-photo img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--rule);
+      display: block;
+    }
+
+    .card-body {
+      flex: 1;
+      min-width: 0;
+    }
     .card-name {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: var(--navy);
-      grid-column: 1;
+      line-height: 1.2;
     }
     .card-shop {
-      font-size: .85rem;
+      font-size: .82rem;
       color: var(--muted);
       font-style: italic;
-      grid-column: 1;
     }
     .card-areas {
-      grid-column: 1 / -1;
-      font-size: .82rem;
+      font-size: .78rem;
       color: var(--crimson);
-      letter-spacing: .04em;
-      margin-top: .25rem;
+      letter-spacing: .03em;
+      margin-top: .15rem;
       font-weight: 400;
     }
     .card-areas::before { content: '📍 '; }
 
     .card-contact {
-      grid-column: 2;
-      grid-row: 1 / span 2;
-      align-self: center;
       text-align: right;
-      font-size: .83rem;
-      line-height: 2;
+      font-size: .8rem;
+      line-height: 1.8;
       color: var(--muted);
+      flex-shrink: 0;
     }
     .card-contact a {
       color: var(--navy);
@@ -218,20 +231,6 @@
     .card-contact .phone,
     .card-contact .email,
     .card-contact .web { display: block; }
-
-    /* ── Barber photo ────────────────────────────── */
-    .card-photo {
-      grid-column: 1 / -1;
-      margin-bottom: .5rem;
-    }
-    .card-photo img {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--rule);
-      display: block;
-    }
 
     #no-results {
       display: none;
@@ -275,12 +274,11 @@
 
     /* ── Responsive ─────────────────────────────── */
     @media (max-width: 560px) {
-      .card { grid-template-columns: 1fr; }
+      .card { flex-wrap: wrap; }
       .card-contact {
-        grid-column: 1;
-        grid-row: auto;
+        width: 100%;
         text-align: left;
-        margin-top: .5rem;
+        margin-top: .25rem;
       }
     }
   </style>
@@ -385,9 +383,11 @@
 
     card.innerHTML = `
       ${photoHTML}
-      <div class="card-name">${b.name}</div>
-      ${b.shop  ? `<div class="card-shop">${b.shop}</div>`   : ''}
-      ${b.areas ? `<div class="card-areas">${b.areas}</div>` : ''}
+      <div class="card-body">
+        <div class="card-name">${b.name}</div>
+        ${b.shop  ? `<div class="card-shop">${b.shop}</div>`   : ''}
+        ${b.areas ? `<div class="card-areas">${b.areas}</div>` : ''}
+      </div>
       <div class="card-contact">${phoneLink}${emailLink}${webLink}</div>
     `;
     return card;
