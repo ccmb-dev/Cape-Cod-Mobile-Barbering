@@ -212,7 +212,7 @@
       margin-top: .15rem;
       font-weight: 400;
     }
-    .card-areas::before { content: '📍 '; }
+    .card-areas::before { content: '📍 Areas: '; }
 
     .card-contact {
       text-align: right;
@@ -299,15 +299,15 @@
 
 <!-- ══ DISCLAIMER ════════════════════════════════════ -->
 <div class="disclaimer">
-  <strong>Notice:</strong> This is an independent informational directory only &mdash; not a referral service and not an endorsement of any individual listed.
+  <strong>Note:</strong> This is an independent informational directory only &mdash; not a referral service and not an endorsement of any individual listed.
   All barbers listed hold an active Massachusetts barbering license in good standing at time of listing.
   Contact barbers directly for availability, pricing, and service areas.
 </div>
 
 <!-- ══ SEARCH ════════════════════════════════════════ -->
 <div class="search-wrap">
-  <label for="search">Search by name, town, or area</label>
-  <input type="search" id="search" placeholder="e.g. Hyannis, Falmouth, shop name…" autocomplete="off" />
+  <label for="search">Search by name, region, or shop</label>
+  <input type="search" id="search" placeholder="e.g. Upper Cape, Nantucket, All…" autocomplete="off" />
 </div>
 
 <!-- ══ DIRECTORY ═════════════════════════════════════ -->
@@ -349,7 +349,7 @@
     //   phone:  "(508) 555-0000",
     //   email:  "email@example.com",
     //   web:    "theirwebsite.com",
-    //   areas:  "Town, Town, Town",
+    //   areas:  "Lower Cape, Mid Cape, Upper Cape, Nantucket, Martha's Vineyard",
     //   photo:  "filename.jpg"
     // },
     {
@@ -373,7 +373,7 @@
   function makeCard(b) {
     const card = document.createElement('div');
     card.className = 'card';
-    card.dataset.search = [b.name, b.shop, b.areas, b.phone, b.email].join(' ').toLowerCase();
+    card.dataset.search = [b.name, b.shop, b.areas || 'any all lower mid upper cape nantucket marthas vineyard', b.phone, b.email].join(' ').toLowerCase();
 
     const webLink   = b.web   ? `<a class="web"   href="https://${b.web.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">${b.web}</a>` : '';
     const emailLink = b.email ? `<a class="email" href="mailto:${b.email}">${b.email}</a>` : '';
