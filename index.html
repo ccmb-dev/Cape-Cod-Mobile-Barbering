@@ -302,7 +302,7 @@
   </div>
 
   <div id="directory"></div>
-  <p id="no-results">No barbers found matching your search.</p>
+    <p id="no-results">No barbers listed in the area yet? Try typing "All" to broaden your search!</p>
 </main>
 
 <!-- ══ FOOTER ════════════════════════════════════════ -->
@@ -356,7 +356,7 @@
   function makeCard(b) {
     const card = document.createElement('div');
     card.className = 'card';
-    card.dataset.search = [b.name, b.shop, b.areas || 'any all lower mid upper cape nantucket marthas vineyard', b.phone, b.email].join(' ').toLowerCase();
+    card.dataset.search = [b.name, b.shop, b.areas || "any all lower mid upper cape nantucket marthas marthas vineyard", b.phone, b.email].join(' ').toLowerCase().replace(/[^a-z0-9\s]/g, '');
 
     const webLink   = b.web   ? `<a class="web"   href="https://${b.web.replace(/^https?:\/\//,'')}" target="_blank" rel="noopener">${b.web}</a>` : '';
     const emailLink = b.email ? `<a class="email" href="mailto:${b.email}">${b.email}</a>` : '';
@@ -377,7 +377,7 @@
 
   function render(filter = '') {
     dir.innerHTML = '';
-    const q = filter.trim().toLowerCase();
+    const q = filter.trim().toLowerCase().replace(/[^a-z0-9\s]/g, '');
     let shown = 0;
 
     BARBERS.forEach(b => {
